@@ -17,7 +17,6 @@
 // Output: none
 // measures from PD2, analog channel 5
 void ADC_Init(void){ 
-	uint16_t delay=0;
 		
 	SYSCTL_RCGCGPIO_R |=0x08;
 	while((SYSCTL_PRGPIO_R&0x08) == 0){};
@@ -29,10 +28,7 @@ void ADC_Init(void){
 		
 	
 	SYSCTL_RCGCADC_R |=0x01;
-	delay = SYSCTL_RCGCADC_R;       // extra time to stabilize
-	delay = SYSCTL_RCGCADC_R;       // extra time to stabilize
-	delay = SYSCTL_RCGCADC_R;       // extra time to stabilize
-	delay = SYSCTL_RCGCADC_R;
+	while((SYSCTL_RCGCADC_R&0x01) == 0){};
 	
 	ADC0_PC_R = 0x01;               // 7) configure for 125K 
 	ADC0_SSPRI_R = 0x0123;          // 8) Seq 3 is highest priority
@@ -58,7 +54,4 @@ uint32_t ADC_In(void){
   ADC0_ISC_R = 0x0008; 
 	return data;
 }
-
- 
-
 
