@@ -51,7 +51,7 @@ int notmain(void){       // single step this program and look at Data
   }
 }
 
-int main2(void){
+int main4(void){
   TExaS_Init();       // Bus clock is 80 MHz 
   ADC_Init();         // turn on ADC, set channel to 5
   ST7735_InitR(INITR_REDTAB); 
@@ -68,6 +68,11 @@ int main2(void){
   }
 }
 
+int main(void)
+{
+	TExaS_Init();
+	ST7735_InitR(INITR_REDTAB); 
+}
 // your function to convert ADC sample to distance (0.001cm)
 uint32_t Convert(uint32_t input){
   input-=25;
@@ -75,7 +80,7 @@ uint32_t Convert(uint32_t input){
 	input=input/2035;
 	return input;
 }
-int main(void){ 
+int main3(void){ 
   TExaS_Init();         // Bus clock is 80 MHz 
   ST7735_InitR(INITR_REDTAB); 
   PortF_Init();
@@ -111,4 +116,3 @@ int realmain(void){
   }
 
 }
-
